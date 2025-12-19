@@ -64,76 +64,76 @@ Características
 Esta funcionalidad asegura que el sistema mantenga la integridad y confiabilidad de los datos financieros.
 
 
-Módulo de Administración de Usuarios (CRUD)
-El sistema incorpora un módulo de administración, destinado a la gestión de usuarios del banco. Este módulo permite realizar operaciones CRUD (Create, Read, Update, Delete lógico) sobre los usuarios registrados en la base de datos, garantizando un control adecuado de las cuentas del sistema.
-Funcionalidades del módulo administrador
-•	Crear usuarios con nombre de usuario, contraseña y saldo inicial.
-•	Listar usuarios registrados en la base de datos en una tabla gráfica.
-•	Actualizar datos del usuario, específicamente el saldo.
-•	Eliminar usuarios de forma lógica, desactivando su estado sin borrar el registro físicamente.
-•	Selección de usuarios desde una tabla, facilitando la edición de información.
-Este módulo fue desarrollado utilizando Java Swing para la interfaz gráfica y JDBC para la comunicación con la base de datos MySQL.
+Módulo de Administración de Usuarios (CRUD)<br>
+El sistema incorpora un módulo de administración, destinado a la gestión de usuarios del banco. Este módulo permite realizar operaciones CRUD (Create, Read, Update, Delete lógico) sobre los usuarios registrados en la base de datos, garantizando un control adecuado de las cuentas del sistema.<br>
+Funcionalidades del módulo administrador<br>
+•	Crear usuarios con nombre de usuario, contraseña y saldo inicial.<br>
+•	Listar usuarios registrados en la base de datos en una tabla gráfica.<br>
+•	Actualizar datos del usuario, específicamente el saldo.<br>
+•	Eliminar usuarios de forma lógica, desactivando su estado sin borrar el registro físicamente.<br>
+•	Selección de usuarios desde una tabla, facilitando la edición de información.<br>
+Este módulo fue desarrollado utilizando Java Swing para la interfaz gráfica y JDBC para la comunicación con la base de datos MySQL.<br>
 
-Explicación del Código del Módulo Administrador
-1. Estructura general de la clase
-La clase Adminusuarios extiende de JFrame, lo que permite crear una ventana independiente para la administración del sistema.
-public class Adminusuarios extends JFrame
-Esta clase contiene:
-•	Componentes gráficos (JPanel, JTable, JTextField, JButton).
-•	Métodos para cada operación CRUD.
-•	Métodos auxiliares para validación y carga de datos.
+Explicación del Código del Módulo Administrador<br>
+1. Estructura general de la clasev
+La clase Adminusuarios extiende de JFrame, lo que permite crear una ventana independiente para la administración del sistema.<br>
+public class Adminusuarios extends JFrame<br>
+Esta clase contiene:<br>
+•	Componentes gráficos (JPanel, JTable, JTextField, JButton).<br>
+•	Métodos para cada operación CRUD.<br>
+•	Métodos auxiliares para validación y carga de datos.<br>
 
-2. Constructor de la clase
+2. Constructor de la clase<br>
 
 <img width="581" height="414" alt="image" src="https://github.com/user-attachments/assets/879e9673-9020-480d-a328-1846d4cb454a" />
  
-Funciones principales del constructor:
-•	Configura el título, tamaño y posición de la ventana.
-•	Asigna el panel principal diseñado en Swing.
-•	Conecta los botones con sus acciones.
-•	Habilita la selección de filas en la tabla.
-•	Hace visible la ventana.
+Funciones principales del constructor:<br>
+•	Configura el título, tamaño y posición de la ventana.<br>
+•	Asigna el panel principal diseñado en Swing.<br>
+•	Conecta los botones con sus acciones.<br>
+•	Habilita la selección de filas en la tabla.<br>
+•	Hace visible la ventana.<br>
 
-3. Asociación de eventos a botones
+3. Asociación de eventos a botones<br>
    
 <img width="732" height="260" alt="image" src="https://github.com/user-attachments/assets/00f9ec4f-13fe-4585-86de-bb035d120782" />
 
-Este método conecta cada botón con su respectiva funcionalidad, permitiendo que el sistema responda a las acciones del usuario de forma interactiva.
+Este método conecta cada botón con su respectiva funcionalidad, permitiendo que el sistema responda a las acciones del usuario de forma interactiva.<br>
 
-4. Crear usuario (CREATE)
-String sql = "INSERT INTO usuarios(username, password, saldo, activo) VALUES (?, ?, ?, true)";
-•	Se obtienen los datos desde los campos de texto.
-•	Se valida que el saldo sea numérico.
-•	Se ejecuta una sentencia SQL INSERT usando PreparedStatement.
-•	Se actualiza automáticamente la tabla después de la inserción.
-Esto evita inyecciones SQL y asegura una correcta persistencia de datos.
+4. Crear usuario (CREATE)<br>
+String sql = "INSERT INTO usuarios(username, password, saldo, activo) VALUES (?, ?, ?, true)"; <br>
+•	Se obtienen los datos desde los campos de texto.<br>
+•	Se valida que el saldo sea numérico.<br>
+•	Se ejecuta una sentencia SQL INSERT usando PreparedStatement.<br>
+•	Se actualiza automáticamente la tabla después de la inserción.<br>
+Esto evita inyecciones SQL y asegura una correcta persistencia de datos.<br>
 
-5. Listar usuarios (READ)
-String sql = "SELECT id, username, saldo, activo FROM usuarios";
-•	Se crea un DefaultTableModel para la tabla.
-•	Se recorren los resultados obtenidos de la base de datos.
-•	Se muestran los usuarios con su estado (Activo/Inactivo).
-Esta funcionalidad permite visualizar de forma clara todos los registros almacenados.
+5. Listar usuarios (READ)<br>
+String sql = "SELECT id, username, saldo, activo FROM usuarios";<br>
+•	Se crea un DefaultTableModel para la tabla.<br>
+•	Se recorren los resultados obtenidos de la base de datos.<br>
+•	Se muestran los usuarios con su estado (Activo/Inactivo).<br>
+Esta funcionalidad permite visualizar de forma clara todos los registros almacenados.<br>
 
-6. Actualizar usuario (UPDATE)
-String sql = "UPDATE usuarios SET saldo = ? WHERE id = ?";
-•	Se obtiene el usuario seleccionado en la tabla.
-•	Se valida el nuevo saldo ingresado.
-•	Se actualiza únicamente el saldo del usuario.
-•	Se refresca la tabla para reflejar los cambios.
+6. Actualizar usuario (UPDATE)<br>
+String sql = "UPDATE usuarios SET saldo = ? WHERE id = ?";<br>
+•	Se obtiene el usuario seleccionado en la tabla.<br>
+•	Se valida el nuevo saldo ingresado.<br>
+•	Se actualiza únicamente el saldo del usuario.<br>
+•	Se refresca la tabla para reflejar los cambios.<br>
 
-7. Eliminación lógica de usuarios (DELETE lógico)
-String sql = "UPDATE usuarios SET activo = false WHERE id = ?";
-En lugar de eliminar físicamente el registro:
-•	Se cambia el estado del usuario a inactivo.
-•	Esto permite mantener la integridad histórica de los datos.
-•	Los usuarios inactivos no pueden iniciar sesión.
+7. Eliminación lógica de usuarios (DELETE lógico)<br>
+String sql = "UPDATE usuarios SET activo = false WHERE id = ?";<br>
+En lugar de eliminar físicamente el registro:<br>
+•	Se cambia el estado del usuario a inactivo.<br>
+•	Esto permite mantener la integridad histórica de los datos.<br>
+•	Los usuarios inactivos no pueden iniciar sesión.<br>
 
-8. Selección de datos desde la tabla
-tablaUsuarios.getSelectionModel().addListSelectionListener(...)
-Cuando el administrador selecciona un usuario:
-•	El nombre de usuario y el saldo se cargan automáticamente en los campos de texto.
-•	Facilita la edición y actualización de información.
+8. Selección de datos desde la tabla<br>
+tablaUsuarios.getSelectionModel().addListSelectionListener(...)<br>
+Cuando el administrador selecciona un usuario:<br>
+•	El nombre de usuario y el saldo se cargan automáticamente en los campos de texto.<br>
+•	Facilita la edición y actualización de información.<br>
 ________________________________________
 F) Estructura del Proyecto
 La estructura del proyecto sigue una organización modular, facilitando el mantenimiento y la escalabilidad del sistema.
