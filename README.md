@@ -62,3 +62,118 @@ Características
 •	Al volver a iniciar sesión, el sistema recupera el último saldo registrado, asegurando la continuidad de la información.
 •	La persistencia se maneja mediante sentencias SQL ejecutadas desde Java usando JDBC.
 Esta funcionalidad asegura que el sistema mantenga la integridad y confiabilidad de los datos financieros.
+
+
+Módulo de Administración de Usuarios (CRUD)
+El sistema incorpora un módulo de administración, destinado a la gestión de usuarios del banco. Este módulo permite realizar operaciones CRUD (Create, Read, Update, Delete lógico) sobre los usuarios registrados en la base de datos, garantizando un control adecuado de las cuentas del sistema.
+Funcionalidades del módulo administrador
+•	Crear usuarios con nombre de usuario, contraseña y saldo inicial.
+•	Listar usuarios registrados en la base de datos en una tabla gráfica.
+•	Actualizar datos del usuario, específicamente el saldo.
+•	Eliminar usuarios de forma lógica, desactivando su estado sin borrar el registro físicamente.
+•	Selección de usuarios desde una tabla, facilitando la edición de información.
+Este módulo fue desarrollado utilizando Java Swing para la interfaz gráfica y JDBC para la comunicación con la base de datos MySQL.
+
+Explicación del Código del Módulo Administrador
+1. Estructura general de la clase
+La clase Adminusuarios extiende de JFrame, lo que permite crear una ventana independiente para la administración del sistema.
+public class Adminusuarios extends JFrame
+Esta clase contiene:
+•	Componentes gráficos (JPanel, JTable, JTextField, JButton).
+•	Métodos para cada operación CRUD.
+•	Métodos auxiliares para validación y carga de datos.
+
+2. Constructor de la clase
+
+<img width="581" height="414" alt="image" src="https://github.com/user-attachments/assets/879e9673-9020-480d-a328-1846d4cb454a" />
+ 
+Funciones principales del constructor:
+•	Configura el título, tamaño y posición de la ventana.
+•	Asigna el panel principal diseñado en Swing.
+•	Conecta los botones con sus acciones.
+•	Habilita la selección de filas en la tabla.
+•	Hace visible la ventana.
+
+3. Asociación de eventos a botones
+   
+<img width="732" height="260" alt="image" src="https://github.com/user-attachments/assets/00f9ec4f-13fe-4585-86de-bb035d120782" />
+
+Este método conecta cada botón con su respectiva funcionalidad, permitiendo que el sistema responda a las acciones del usuario de forma interactiva.
+
+4. Crear usuario (CREATE)
+String sql = "INSERT INTO usuarios(username, password, saldo, activo) VALUES (?, ?, ?, true)";
+•	Se obtienen los datos desde los campos de texto.
+•	Se valida que el saldo sea numérico.
+•	Se ejecuta una sentencia SQL INSERT usando PreparedStatement.
+•	Se actualiza automáticamente la tabla después de la inserción.
+Esto evita inyecciones SQL y asegura una correcta persistencia de datos.
+
+5. Listar usuarios (READ)
+String sql = "SELECT id, username, saldo, activo FROM usuarios";
+•	Se crea un DefaultTableModel para la tabla.
+•	Se recorren los resultados obtenidos de la base de datos.
+•	Se muestran los usuarios con su estado (Activo/Inactivo).
+Esta funcionalidad permite visualizar de forma clara todos los registros almacenados.
+
+6. Actualizar usuario (UPDATE)
+String sql = "UPDATE usuarios SET saldo = ? WHERE id = ?";
+•	Se obtiene el usuario seleccionado en la tabla.
+•	Se valida el nuevo saldo ingresado.
+•	Se actualiza únicamente el saldo del usuario.
+•	Se refresca la tabla para reflejar los cambios.
+
+7. Eliminación lógica de usuarios (DELETE lógico)
+String sql = "UPDATE usuarios SET activo = false WHERE id = ?";
+En lugar de eliminar físicamente el registro:
+•	Se cambia el estado del usuario a inactivo.
+•	Esto permite mantener la integridad histórica de los datos.
+•	Los usuarios inactivos no pueden iniciar sesión.
+
+8. Selección de datos desde la tabla
+tablaUsuarios.getSelectionModel().addListSelectionListener(...)
+Cuando el administrador selecciona un usuario:
+•	El nombre de usuario y el saldo se cargan automáticamente en los campos de texto.
+•	Facilita la edición y actualización de información.
+________________________________________
+F) Estructura del Proyecto
+La estructura del proyecto sigue una organización modular, facilitando el mantenimiento y la escalabilidad del sistema.
+/src
+ ├── Conexion.java
+ ├── Login.java
+ ├── Banco.java
+ ├── Adminusuarios.java
+ └── Main.java
+Descripción de archivos
+•	Conexion.java: Maneja la conexión con la base de datos MySQL mediante JDBC.
+•	Login.java: Controla el acceso de usuarios al sistema.
+•	Banco.java: Contiene la lógica de operaciones bancarias.
+•	Adminusuarios.java: Gestión administrativa de usuarios (CRUD).
+•	Main.java: Punto de inicio de la aplicación.
+
+G) Proceso Completo de Desarrollo
+1. Análisis
+•	Identificación de requerimientos funcionales.
+•	Definición de roles (usuario y administrador).
+•	Diseño de operaciones bancarias básicas.
+2. Diseño
+•	Diseño de la base de datos en MySQL.
+•	Creación de interfaces gráficas con Java Swing.
+•	Definición de flujos de navegación entre ventanas.
+3. Implementación
+•	Programación en Java orientado a objetos.
+•	Uso de JDBC para ejecutar sentencias SQL.
+•	Implementación del CRUD y validaciones de datos.
+4. Pruebas
+•	Pruebas de login con credenciales válidas e inválidas.
+•	Pruebas de operaciones bancarias.
+•	Verificación de persistencia de datos.
+•	Validación del módulo administrador.
+5. Despliegue
+•	Compilación del proyecto en formato JAR.
+•	Ejecución del sistema en entorno local.
+•	Conexión a base de datos MySQL funcional.
+
+Conclusión
+El sistema bancario desarrollado cumple con los objetivos planteados, permitiendo la gestión segura de usuarios y operaciones financieras mediante una interfaz gráfica intuitiva. La integración de Java, Java Swing y MySQL garantiza una correcta persistencia de datos, seguridad en el acceso y una experiencia de usuario eficiente. El uso de operaciones CRUD y eliminación lógica refuerza la integridad de la información, demostrando una aplicación práctica de los conceptos aprendidos durante el desarrollo del proyecto.
+
+
