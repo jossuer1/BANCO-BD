@@ -135,45 +135,45 @@ Cuando el administrador selecciona un usuario:<br>
 •	El nombre de usuario y el saldo se cargan automáticamente en los campos de texto.<br>
 •	Facilita la edición y actualización de información.<br>
 ________________________________________
-F) Estructura del Proyecto
-La estructura del proyecto sigue una organización modular, facilitando el mantenimiento y la escalabilidad del sistema.
-/src
- ├── Conexion.java
- ├── Login.java
- ├── Banco.java
- ├── Adminusuarios.java
- └── Main.java
-Descripción de archivos
-•	Conexion.java: Maneja la conexión con la base de datos MySQL mediante JDBC.
-•	Login.java: Controla el acceso de usuarios al sistema.
-•	Banco.java: Contiene la lógica de operaciones bancarias.
-•	Adminusuarios.java: Gestión administrativa de usuarios (CRUD).
-•	Main.java: Punto de inicio de la aplicación.
+F) Estructura del Proyecto<br>
+La estructura del proyecto sigue una organización modular, facilitando el mantenimiento y la escalabilidad del sistema.<br>
+/src<br>
+ ├── Conexion.java<br>
+ ├── Login.java<br>
+ ├── Banco.java<br>
+ ├── Adminusuarios.java<br>
+ └── Main.java<br>
+Descripción de archivos<br>
+•	Conexion.java: Maneja la conexión con la base de datos MySQL mediante JDBC.<br>
+•	Login.java: Controla el acceso de usuarios al sistema.<br>
+•	Banco.java: Contiene la lógica de operaciones bancarias.<br>
+•	Adminusuarios.java: Gestión administrativa de usuarios (CRUD).<br>
+•	Main.java: Punto de inicio de la aplicación.<br>
 
-G) Proceso Completo de Desarrollo
-1. Análisis
-•	Identificación de requerimientos funcionales.
-•	Definición de roles (usuario y administrador).
-•	Diseño de operaciones bancarias básicas.
-2. Diseño
-•	Diseño de la base de datos en MySQL.
-•	Creación de interfaces gráficas con Java Swing.
-•	Definición de flujos de navegación entre ventanas.
-3. Implementación
-•	Programación en Java orientado a objetos.
-•	Uso de JDBC para ejecutar sentencias SQL.
-•	Implementación del CRUD y validaciones de datos.
-4. Pruebas
-•	Pruebas de login con credenciales válidas e inválidas.
-•	Pruebas de operaciones bancarias.
-•	Verificación de persistencia de datos.
-•	Validación del módulo administrador.
-5. Despliegue
-•	Compilación del proyecto en formato JAR.
-•	Ejecución del sistema en entorno local.
-•	Conexión a base de datos MySQL funcional.
+G) Proceso Completo de Desarrollo<br>
+1. Análisis<br>
+•	Identificación de requerimientos funcionales.<br>
+•	Definición de roles (usuario y administrador).<br>
+•	Diseño de operaciones bancarias básicas.<br>
+2. Diseño<br>
+•	Diseño de la base de datos en MySQL.<br>
+•	Creación de interfaces gráficas con Java Swing.<br>
+•	Definición de flujos de navegación entre ventanas.<br>
+3. Implementación<br>
+•	Programación en Java orientado a objetos.<br>
+•	Uso de JDBC para ejecutar sentencias SQL.<br>
+•	Implementación del CRUD y validaciones de datos.<br>
+4. Pruebas<br>
+•	Pruebas de login con credenciales válidas e inválidas.<br>
+•	Pruebas de operaciones bancarias.<br>
+•	Verificación de persistencia de datos.<br>
+•	Validación del módulo administrador.<br>
+5. Despliegue<br>
+•	Compilación del proyecto en formato JAR.<br>
+•	Ejecución del sistema en entorno local.<br>
+•	Conexión a base de datos MySQL funcional.<br>
 
-Conclusión
+Conclusión<br>
 El sistema bancario desarrollado cumple con los objetivos planteados, permitiendo la gestión segura de usuarios y operaciones financieras mediante una interfaz gráfica intuitiva. La integración de Java, Java Swing y MySQL garantiza una correcta persistencia de datos, seguridad en el acceso y una experiencia de usuario eficiente. El uso de operaciones CRUD y eliminación lógica refuerza la integridad de la información, demostrando una aplicación práctica de los conceptos aprendidos durante el desarrollo del proyecto.
 
 
