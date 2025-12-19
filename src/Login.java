@@ -47,10 +47,19 @@ public class Login extends JFrame {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+
                 JOptionPane.showMessageDialog(this, "Bienvenido " + usuario);
-                new BancaForm(usuario);
+
+                if (usuario.equalsIgnoreCase("admin")) {
+                    new Adminusuarios();
+                } else {
+                    new BancaForm(usuario);
+                }
+
                 dispose();
+
             } else {
+
                 intentos++;
                 JOptionPane.showMessageDialog(this,
                         "Credenciales incorrectas. Intento " + intentos + " de 3");
@@ -65,4 +74,5 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(this, "Error en login");
         }
     }
+
 }
